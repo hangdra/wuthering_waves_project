@@ -1,0 +1,26 @@
+
+{
+	'charName': 'lucy',
+	'my_input_sim': < src.core.input.input_sim.InputUtils object at 0x0000025A5F1A2660 > ,
+	'logger': < Logger src.utils.log(DEBUG) > ,
+	'actionName': 'p1_light_att1',
+	'actionType': < ActionType.LIGHT_ATT: 0 > ,
+	'actionMethod': < ActionMethod.CLICK: 0 > ,
+	'animationTime': 0.18,
+	'action_phase': 1,
+	'is_combo': False,
+	'force_time_stop_time': 0.0,
+	'last_dmg_time': -1.0,
+	'w_light': 0.18,
+	'w_heavy': 0.0,
+	'w_e': 0.0,
+	'w_r': 0.0,
+	'w_switch': 0.0,
+	'animation_duration_multiplier': 1,
+	'animation_duration_add_time_value': 0.0,
+	'step': 1,
+	'click_time_default': 2,
+	'click_time_interval': 0.01,
+	'next_light_att_max_wait_time': 1.8,
+	'wait_to_cast_next_action_dic': {}
+}

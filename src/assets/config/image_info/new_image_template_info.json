@@ -1,0 +1,2219 @@
+[
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_file": "new_all_in_one_template.png",
+    "name": "e_forte",
+    "target_process_method": "get_rid_dark_part_for_matching",
+    "icon_position_group": "center_bottom",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_window_target_x": 950,
+    "template_window_target_y": 829,
+    "template_width": 13,
+    "template_height": 13,
+    "resize": false,
+    "template_x": 0,
+    "template_y": 0,
+    "load_image": true,
+    "target_search_type": "single_match",
+    "category": "reinforce_active"
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_file": "new_all_in_one_template.png",
+    "name": "e_forte_not_ready",
+    "target_process_method": "get_rid_light_part_for_matching",
+    "icon_position_group": "center_bottom",
+    "min_success_score": 0.6,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_window_target_x": 950,
+    "template_window_target_y": 829,
+    "template_width": 13,
+    "template_height": 13,
+    "resize": false,
+    "template_x": 13,
+    "template_y": 0,
+    "load_image": true,
+    "target_search_type": "single_match",
+    "category": "reinforce_active"
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_file": "new_all_in_one_template.png",
+    "name": "mouse_forte_not_ready",
+    "target_process_method": "get_rid_light_part_for_matching",
+    "icon_position_group": "center_bottom",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_window_target_x": 950,
+    "template_window_target_y": 825,
+    "template_width": 18,
+    "template_height": 19,
+    "resize": false,
+    "template_x": 26,
+    "template_y": 0,
+    "load_image": true,
+    "target_search_type": "single_match",
+    "category": "reinforce_active"
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_file": "new_all_in_one_template.png",
+    "name": "mouse_forte",
+    "target_process_method": "get_rid_dark_part_for_matching",
+    "icon_position_group": "center_bottom",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_window_target_x": 950,
+    "template_window_target_y": 815,
+    "template_width": 18,
+    "template_height": 24,
+    "resize": true,
+    "template_x": 44,
+    "template_y": 0,
+    "load_image": true,
+    "target_search_type": "single_match",
+    "category": "reinforce_active"
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_file": "new_all_in_one_template.png",
+    "name": "char_1",
+    "target_process_method": "get_rid_light_part_for_matching",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_window_target_x": 1446,
+    "template_window_target_y": 177,
+    "template_width": 15,
+    "template_height": 15,
+    "template_x": 62,
+    "template_y": 0,
+    "load_image": true,
+    "target_search_type": "single_match",
+    "category": "char_absent"
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_file": "new_all_in_one_template.png",
+    "name": "char_2",
+    "target_process_method": "get_rid_light_part_for_matching",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_window_target_x": 1446,
+    "template_window_target_y": 287,
+    "template_width": 15,
+    "template_height": 15,
+    "template_x": 77,
+    "template_y": 0,
+    "load_image": true,
+    "target_search_type": "single_match",
+    "category": "char_absent"
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_file": "new_all_in_one_template.png",
+    "name": "char_3",
+    "target_process_method": "get_rid_light_part_for_matching",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_window_target_x": 1446,
+    "template_window_target_y": 397,
+    "template_width": 15,
+    "template_height": 15,
+    "template_x": 92,
+    "template_y": 0,
+    "load_image": true,
+    "target_search_type": "single_match",
+    "category": "char_absent"
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u79e7\u79e7\u00b7\u7384\u7fce",
+    "name_pinyin": "yangyang\u00b7xuanling",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 107,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u4e3d\u8d1d\u5361",
+    "name_pinyin": "libeika",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 147,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u897f\u683c\u8389\u5361",
+    "name_pinyin": "xigelika",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 187,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u83ab\u5b81",
+    "name_pinyin": "moning",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 227,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u4ec7\u8fdc",
+    "name_pinyin": "chouyuan",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 267,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u6d1b\u745f\u83c8",
+    "name_pinyin": "luosela",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 307,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u8fbe\u59ae\u5a05",
+    "name_pinyin": "daniya",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 347,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u9646\u00b7\u8d6b\u65af",
+    "name_pinyin": "lu\u00b7hesi",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 387,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u7433\u5948",
+    "name_pinyin": "linnai",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 427,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u5609\u8d1d\u8389\u5a1c",
+    "name_pinyin": "jiabeilina",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 467,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u9732\u897f",
+    "name_pinyin": "luxi",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 507,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u7eef\u96ea",
+    "name_pinyin": "feixue",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 547,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u7231\u5f25\u65af",
+    "name_pinyin": "aimisi",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 587,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u5343\u54b2",
+    "name_pinyin": "qianxiao",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 627,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u5c24\u8bfa",
+    "name_pinyin": "younuo",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 667,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u5965\u53e4\u65af\u5854",
+    "name_pinyin": "aogusita",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 707,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u5f17\u6d1b\u6d1b",
+    "name_pinyin": "fuluoluo",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 747,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u9732\u5e15",
+    "name_pinyin": "lupa",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 787,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u5361\u63d0\u5e0c\u5a05",
+    "name_pinyin": "katixiya",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 827,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u590f\u7a7a",
+    "name_pinyin": "xiakong",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 867,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u8d5e\u59ae",
+    "name_pinyin": "zanni",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 907,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u574e\u7279\u96f7\u62c9",
+    "name_pinyin": "kanteleila",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 947,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u5e03\u5170\u7279",
+    "name_pinyin": "bulante",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 987,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u83f2\u6bd4",
+    "name_pinyin": "feibi",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1027,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u6d1b\u53ef\u53ef",
+    "name_pinyin": "luokeke",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1067,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u73c2\u83b1\u5854",
+    "name_pinyin": "kelaita",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1107,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u693f",
+    "name_pinyin": "chun",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1147,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u5b88\u5cb8\u4eba",
+    "name_pinyin": "shouanren",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1187,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u76f8\u91cc\u8981",
+    "name_pinyin": "xiangliyao",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1227,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u6298\u679d",
+    "name_pinyin": "zhezhi",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1267,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u957f\u79bb",
+    "name_pinyin": "changli",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1307,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u4eca\u6c50",
+    "name_pinyin": "jinxi",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1347,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u541f\u9716",
+    "name_pinyin": "yinlin",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1387,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u5fcc\u708e",
+    "name_pinyin": "jiyan",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1427,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u5361\u5361\u7f57",
+    "name_pinyin": "kakaluo",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1467,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u51cc\u9633",
+    "name_pinyin": "lingyang",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1507,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u9274\u5fc3",
+    "name_pinyin": "jianxin",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1547,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u7ef4\u91cc\u5948",
+    "name_pinyin": "weilinai",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1587,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u5b89\u53ef",
+    "name_pinyin": "anke",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1627,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u6f02\u6cca\u8005",
+    "name_pinyin": "piaobozhe",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1667,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u535c\u7075",
+    "name_pinyin": "buling",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1707,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u706f\u706f",
+    "name_pinyin": "dengdeng",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1747,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u91c9\u745a",
+    "name_pinyin": "youhu",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1787,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u6e0a\u6b66",
+    "name_pinyin": "yuanwu",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1827,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u4e39\u747e",
+    "name_pinyin": "danjin",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1867,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u6563\u534e",
+    "name_pinyin": "sanhua",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1907,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u83ab\u7279\u6590",
+    "name_pinyin": "motefei",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1947,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u6843\u7948",
+    "name_pinyin": "taoqi",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 1987,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u79cb\u6c34",
+    "name_pinyin": "qiushui",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 2027,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u767d\u82b7",
+    "name_pinyin": "baizhi",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 2067,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u79e7\u79e7",
+    "name_pinyin": "yangyang",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 2107,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/new_all_in_one_template.png",
+    "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_small_grey.png",
+    "image_file": "new_all_in_one_template.png",
+    "category": "all_char_head_icon",
+    "name": "\u70bd\u971e",
+    "name_pinyin": "chixia",
+    "target_process_method": "",
+    "template_process_method": "",
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1463,
+        "y": 176,
+        "index": 1
+      },
+      {
+        "x": 1463,
+        "y": 286,
+        "index": 2
+      },
+      {
+        "x": 1463,
+        "y": 396,
+        "index": 3
+      }
+    ],
+    "resize": false,
+    "template_x": 2147,
+    "template_y": 0,
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "template_width": 40,
+    "template_height": 41,
+    "target_search_type": "multiple_match",
+    "load_image": true
+  }
+]
