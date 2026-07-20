@@ -17,7 +17,7 @@ def timer(func):
     return wrapper
 
 def get_root_dir(_file,max_iter= 10):
-    root_dir_name = "wuthering_waves_ok_copy"
+    root_dir_name = "wuthering_waves_project"
     dir_now = Path(_file)
     step = 0
     while not str(dir_now).endswith(root_dir_name) and step < max_iter:
