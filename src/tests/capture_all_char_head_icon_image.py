@@ -291,8 +291,8 @@ def capture_image_and_check_char(name=""):
 
 # test_move_mouse(test_move_mouse)
 
-# test_capture_image(name="mc_")
-capture_image_and_check_char("mc_")
+test_capture_image(name="mc_技能cd")
+# capture_image_and_check_char("mc_技能cd")
 # import shutil
 # remove_and_recombine_img()
 # image_template_concat = imread_chinese(f"src/tests/images/auto/frame_all_char_pic_remove_part.png")
