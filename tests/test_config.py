@@ -58,32 +58,32 @@ icon_json_one = {
     "image_file_from_project_root": "src/assets/images/all_char_head_icon2.png",
     "image_grey_file_from_project_root": "src/assets/images/all_char_head_icon_grey2.png",
     "image_file": "all_char_head_icon_grey.png",
-    "category":"char_head_icon",
+    "category": "char_head_icon",
     "name": "",
     "name_pinyin": "",
     "target_process_method": "",
-    "template_process_method":"",
+    "template_process_method": "",
     "icon_position_group": "right_top",
     "min_success_score": 0.7,
     "template_window_width": 1600,
     "template_window_height": 900,
     # "template_search_area_method": -1,
     # "template_match_method": -1,
-    "template_area_list":[{
+    "template_area_list": [{
         "x": 1478,
         "y": 191,
         "index": 1
-      },
-      {
-        "x": 1478,
-        "y": 301,
-        "index": 2
-      },
-      {
-        "x": 1478,
-        "y": 411,
-        "index": 3
-      }],
+    },
+        {
+            "x": 1478,
+            "y": 301,
+            "index": 2
+        },
+        {
+            "x": 1478,
+            "y": 411,
+            "index": 3
+        }],
     "resize": False,
     "template_x": 0,
     "template_y": 0
@@ -97,9 +97,10 @@ for i in range(0, len(names)):
     # icon_json_copy["template_height"] = 49
     icon_json_copy["image_file_from_project_root"] = "src/assets/images/char_head_small_0_15.png"
     icon_json_copy["image_grey_file_from_project_root"] = "src/assets/images/char_head_small_0_15_grey.png"
-
-    icon_json_copy["x_variance_factor"]=2
-    icon_json_copy["y_variance_factor"]=2
+    icon_json_copy["target_search_type"] = "multiple_match"
+    icon_json_copy["target_search_return"] = "index"
+    icon_json_copy["x_variance_factor"] = 2
+    icon_json_copy["y_variance_factor"] = 2
     icon_json_copy["template_width"] = 34
     icon_json_copy["template_height"] = 34
     icon_json_copy["template_x"] = 0 + i * icon_json_copy["template_width"]
@@ -107,7 +108,6 @@ for i in range(0, len(names)):
 
 with open('../src/assets/config/image_info/all_char_head_icon_small3.json', 'w', encoding='utf-8') as f:
     json.dump(all_icon_json_list, f, indent=2)  # 文件里会写入 "resize": false
-
 
 template_one = {
     "image_file_from_project_root": "",
@@ -126,7 +126,7 @@ template_one = {
     "template_x": 0,
     "template_y": 0,
     "load_image": False
-  }
+}
 # with open('../src/assets/config/image_info/image_template_info.json', 'r', encoding='utf-8') as f:
 #     template_info_list = json.load(f)
 #
@@ -229,4 +229,3 @@ template_one = {
 
 # tar_x = tar_s_divided_tem_s*(1478-1600/2)+tar_w/2
 # print("tar_x:", tar_x)
-

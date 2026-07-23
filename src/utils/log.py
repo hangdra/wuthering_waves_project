@@ -13,7 +13,6 @@ logger.setLevel(logging.DEBUG)
 project_root = Path(__file__).parent.parent.parent  # 假设当前文件在 src/utils/ 下，向上三级到达根目录
 logs_dir = project_root / 'logs'
 logs_dir.mkdir(exist_ok=True)  # 确保目录存在
-print(type(logs_dir))
 log_file_path = logs_dir / 'project.log'
 file_handler = logging.FileHandler(str(log_file_path), encoding='utf-8')
 file_handler.setLevel(logging.INFO)

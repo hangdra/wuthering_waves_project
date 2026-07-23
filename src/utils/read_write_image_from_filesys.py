@@ -12,7 +12,7 @@ project_root = Path(__file__).parent.parent.parent
 
 
 
-@timer
+# @timer
 def imread_chinese(image_path, flag=cv2.IMREAD_COLOR):
     """
     读取可能包含中文路径的图片

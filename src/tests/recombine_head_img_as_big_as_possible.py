@@ -17,6 +17,7 @@ import numpy as np
 from typing import List, Tuple, Union
 from src.utils.read_write_image_from_filesys import imwrite_chinese, imread_chinese
 
+
 def concat_images_grid_with_rects(
         images: List[np.ndarray],
         max_width: int,
@@ -208,9 +209,10 @@ names_need_cut_off_top = ["珂莱塔"]
 names_need_cut_off_right = ["仇远", "陆·赫斯"]
 names_need_cut_off_bottom = ["椿", "釉瑚", "渊武", "忌炎", "卡卡罗", "布兰特"]
 
-special_remove = {"安可":[0.01,0.01,0.01,0.01]}
+special_remove = {"安可": [0.01, 0.01, 0.01, 0.01]}
 
-def get_img_and_recombine(default_remove_percentage = 0.05):
+
+def get_img_and_recombine(default_remove_percentage=0.05):
     w_tem_o, h_tem_o = 46, 49
     all_head_img = imread_chinese("src/assets/images/all_char_head_icon.png")
 
@@ -245,6 +247,7 @@ def get_img_and_recombine(default_remove_percentage = 0.05):
             remove_bottom = special_remove[names[i]][3]
         left_tem = remove_part_of_img(left_tem, remove_left, remove_bottom, remove_top, remove_right)
         # left_tem = cv2.resize(left_tem, None, fx=3, fy=3)
+        print("left_tem",left_tem.shape)
         images_bigger.append(cv2.resize(left_tem, None, fx=3, fy=3))
         images.append(left_tem)
 
@@ -258,7 +261,8 @@ def get_img_and_recombine(default_remove_percentage = 0.05):
     # 拼接并自动换行
     combined, rects = concat_images_grid_with_rects(images, max_width=MAX_WIDTH, align='top', fill_color=(0, 0, 0, 255))
 
-    combined_b, rects_b = concat_images_grid_with_rects(images_bigger, max_width=MAX_WIDTH, align='top', fill_color=(255, 255, 255, 255))
+    combined_b, rects_b = concat_images_grid_with_rects(images_bigger, max_width=MAX_WIDTH, align='top',
+                                                        fill_color=(255, 255, 255, 255))
     print(rects)
     for i, (x, y, w, h) in enumerate(rects_b):
         print(f"Image {i}: 左上角 ({x}, {y}), 宽 {w}, 高 {h}")
@@ -307,10 +311,12 @@ def get_img_and_recombine(default_remove_percentage = 0.05):
     # 例如，您可以在最终图像上绘制矩形框来验证
     # for (x, y, w, h) in rects:
     #     cv2.rectangle(combined, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    raise Exception("shit")
     cv2.imshow("Verification", combined_b)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
     return combined, combine_config_info
+
 
 remove_percentage = 0.01
 remove_percentage_str = str(remove_percentage).split(".")[1]
@@ -346,7 +352,7 @@ for filename in os.listdir(project_root / tar_img_dir):
 
         for tem_config in config_a:
             tem_x, tem_y, tem_w, tem_h, template_window_width, template_window_height = tem_config["template_x"], \
-            tem_config["template_y"], tem_config[
+                tem_config["template_y"], tem_config[
                 "template_width"], tem_config["template_height"], tem_config["template_window_width"], tem_config[
                 "template_window_height"]
             tem_img = img_a[tem_y:tem_y + tem_h, tem_x:tem_x + tem_w]
@@ -372,20 +378,19 @@ for filename in os.listdir(project_root / tar_img_dir):
                                                                                  y_variance_factor)
                     target_img_sub = get_sub_image_from_image(tar_img, roi_x_fix, roi_y_fix, roi_w_fix, roi_h_fix)
                     tar_sub_img[filename + str(search_index)] = target_img_sub
-                    resized = cv2.resize(tem_img, None, fx=tar_s_divided_tem_s,fy=tar_s_divided_tem_s)
+                    resized = cv2.resize(tem_img, None, fx=tar_s_divided_tem_s, fy=tar_s_divided_tem_s)
                     # cv2.imshow(tem_config["name_pinyin"], resized)
                     # cv2.waitKey(0)
                     # cv2.destroyAllWindows()
-                    use_color_img = False
+                    force_grey_in = False
                     use_canny_in = False
-                    cv_method = "TM_CCOEFF_NORMED_use_canny" + str(use_canny_in)+"_use_color_"+str(use_color_img)
-                    res = match_template_probability(resized, target_img_sub, use_color=use_color_img,
+                    cv_method = "TM_CCOEFF_NORMED_use_canny" + str(use_canny_in) + "_force_grey_" + str(force_grey_in)
+                    res = match_template_probability(target_img_sub,resized, force_grey=force_grey_in,
                                                      use_canny=use_canny_in,
                                                      visualize_path="src/tests/images/auto/matches/" +
                                                                     filename.split("_")[0] + "_" + str(
                                                          search_index) + "_" + tem_config["name"],
                                                      method=cv2.TM_CCOEFF_NORMED)
-
 
                     print("匹配分数:", res['score'])
                     print("缩放比例:", res['scale'])
@@ -421,24 +426,24 @@ for filename in file_result.keys():
         counter += 1
         item = file_result_item[index]
         vis = tar_sub_img[filename + str(index)].copy()
-        hv,wv = vis.shape[:2]
-        if counter==3:
+        hv, wv = vis.shape[:2]
+        if counter == 3:
             mr = 60
         else:
             mr = 30
         bottom_add = 30
-        left_tem = pad_image(vis, 0, bottom_add, 0, mr)
-        cv2.rectangle(left_tem, item["top_left"], item["bottom_right"], (0, 255, 0), 2)
-        cv2.putText(left_tem, str(f"{item["confidence"]:0.6f} "), (0, bottom_add+hv-20),
+        vis_pad = pad_image(vis, 0, bottom_add, 0, mr)
+        cv2.rectangle(vis_pad, item["top_left"], item["bottom_right"], (0, 255, 0), 2)
+        cv2.putText(vis_pad, str(f"{item["confidence"]:0.6f} "), (0, bottom_add + hv - 20),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
-        cv2.putText(left_tem, str(f"{item["name"]}"), (0, bottom_add+hv-5),
+        cv2.putText(vis_pad, str(f"{item["name"]}"), (0, bottom_add + hv - 5),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
         # imwrite_chinese(
         #     "src/tests/images/auto/matches/" + filename.split("_")[0] + "_" + str(index) + "_" + item[
         #         "name"] + f"{item["confidence"]:0.4f}.png", vis)
         if padding_image is None:
-            padding_image = left_tem
+            padding_image = vis_pad
         else:
-            padding_image = concat_images_with_padding_new(padding_image, left_tem)
+            padding_image = concat_images_with_padding_new(padding_image, vis_pad)
 imwrite_chinese(
-    "src/tests/images/auto/matches/all_matches"+remove_percentage_str+"_"+cv_method+".png", padding_image)
+    "src/tests/images/auto/matches/all_matches" + remove_percentage_str + "_" + cv_method + ".png", padding_image)

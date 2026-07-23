@@ -9,10 +9,9 @@ from src.core.vision.window_capture import WindowCapture
 from src.utils.get_game_window_id import GetGameWindowId
 from src.utils.read_write_image_from_filesys import imwrite_chinese,imread_chinese
 from PIL import Image
-import win32gui
-import win32api
+
 import time
-from src.utils.image_dealer import hconcat_pad, get_grey_image, pad_image, \
+from src.utils.image_dealer import  get_grey_image, pad_image, \
     concat_images_with_padding_new
 from src.utils.log import logger
 

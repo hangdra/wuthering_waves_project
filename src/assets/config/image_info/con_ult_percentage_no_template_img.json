@@ -1,0 +1,32 @@
+[
+  {
+    "category": "energy_percentage",
+    "name": "con_percentage",
+    "icon_position_group": "center_bottom",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_window_target_x": 600,
+    "template_window_target_y": 813,
+    "template_width": 45,
+    "template_height": 45,
+    "load_image": false,
+    "x_variance_factor": 1.4,
+    "y_variance_factor": 1.4
+  },
+  {
+    "category": "energy_percentage",
+    "name": "ult_percentage",
+    "icon_position_group": "right_bottom",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_window_target_x": 1478,
+    "template_window_target_y": 771,
+    "template_width": 69,
+    "template_height": 69,
+    "load_image": false,
+    "x_variance_factor": 1.4,
+    "y_variance_factor": 1.4
+  }
+]

@@ -5,18 +5,22 @@
 import cv2
 import numpy as np
 from src.utils.read_write_image_from_filesys import imwrite_chinese
-from src.utils.tools import timer
+from src.utils.tools import timer, stats_decorator
 from enum import Enum
-
+from typing import List, Tuple, Union
+from src.assets.config.config_others_all import *
+from src.utils.data_store import data_store
 
 class IconPosition(Enum):
     RIGHT_BOTTOM = "right_bottom"
     CENTER_BOTTOM = "center_bottom"
     RIGHT_TOP = "right_top"
 
+
 class TemplateType(Enum):
     SINGLE_TARGET = "single_target"
     MULTIPLE_TARGET = "multiple_targets"
+
 
 def get_position_group(group_name):
     if group_name == "center_bottom":
@@ -41,6 +45,7 @@ def get_process_method(method_name):
             target_process_method_in = get_grey_image
     return target_process_method_in
 
+
 def remove_part_of_img(img, remove_left_percentage=0.0, remove_bottom_percentage=0.0, remove_top_percentage=0.0,
                        remove_right_percentage=0.0):
     h, w = img.shape[:2]
@@ -52,7 +57,7 @@ def remove_part_of_img(img, remove_left_percentage=0.0, remove_bottom_percentage
     end_x = int(w * (1 - remove_right_percentage))
     start_y = int(h * remove_top_percentage)
     end_y = int(h * (1 - remove_bottom_percentage))
-    return img[start_y:end_y, start_x:end_x]
+    return img[start_y:end_y, start_x:end_x],(start_x,start_y)
 
 
 def pad_image(img, top, bottom, left, right, fill_color=(255, 255, 255, 0)):
@@ -64,6 +69,173 @@ def pad_image(img, top, bottom, left, right, fill_color=(255, 255, 255, 0)):
         value=fill_color
     )
     return padded
+
+
+def concat_images_grid_with_rects(
+        images: List[np.ndarray],
+        max_width: int = 1960,
+        align: str = 'top',
+        fill_color: Union[int, tuple] = (0, 0, 0, 255)
+) -> Tuple[np.ndarray, List[Tuple[int, int, int, int]]]:
+    """
+    水平拼接图像，超出 max_width 时自动换行，并返回每个原图在最终图像中的位置。
+
+    参数：
+        images: 图像列表 (numpy array)
+        max_width: 每行最大宽度（像素）
+        align: 垂直对齐方式，'top' / 'bottom' / 'center'
+        fill_color: 填充颜色，自动适配通道数
+
+    返回：
+        (result_image, rects_list)
+        - result_image: 拼接后的最终图像
+        - rects_list: 列表，每个元素为 (x, y, w, h)，对应 images 中相同顺序的图像
+                      (x, y) 是左上角坐标，(w, h) 是原始图像的宽高（未缩放）
+    """
+    if not images:
+        raise ValueError("图像列表为空")
+
+    # ---------- 1. 统一通道数 ----------
+    def get_dims(img):
+        if len(img.shape) == 2:
+            return img.shape[0], img.shape[1], 1
+        else:
+            return img.shape[0], img.shape[1], img.shape[2]
+
+    # 收集所有图像通道数
+    c_list = [get_dims(img)[2] for img in images]
+    target_c = max(c_list)
+
+    def convert_to_channels(img, target_c):
+        h, w, c = get_dims(img)
+        if c == target_c:
+            return img
+        if target_c == 1:
+            if c == 3:
+                return cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            elif c == 4:
+                return cv2.cvtColor(cv2.cvtColor(img, cv2.COLOR_BGRA2BGR), cv2.COLOR_BGR2GRAY)
+            else:
+                return img
+        elif target_c == 3:
+            if c == 1:
+                return cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+            elif c == 4:
+                return cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
+            else:
+                return img
+        elif target_c == 4:
+            if c == 1:
+                bgr = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+                return cv2.cvtColor(bgr, cv2.COLOR_BGR2BGRA)
+            elif c == 3:
+                return cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)
+            else:
+                return img
+        else:
+            raise ValueError(f"不支持的通道数: {target_c}")
+
+    unified_images = [convert_to_channels(img, target_c) for img in images]
+
+    # 适配 fill_color 到目标通道
+    if isinstance(fill_color, (int, float)):
+        fill_color = (fill_color,) * target_c
+    else:
+        fill_color = tuple(fill_color)
+        if len(fill_color) < target_c:
+            fill_color = fill_color + (fill_color[-1],) * (target_c - len(fill_color))
+        elif len(fill_color) > target_c:
+            fill_color = fill_color[:target_c]
+    fill_color = tuple(int(c) for c in fill_color)
+
+    # ---------- 2. 按行分组 ----------
+    rows = []  # 每行是一个图像列表
+    current_row = []
+    current_width = 0
+
+    for img in unified_images:
+        h, w = img.shape[:2]
+        if not current_row:
+            current_row.append(img)
+            current_width = w
+        else:
+            if current_width + w > max_width:
+                rows.append(current_row)
+                current_row = [img]
+                current_width = w
+            else:
+                current_row.append(img)
+                current_width += w
+    if current_row:
+        rows.append(current_row)
+
+    # ---------- 3. 处理每一行，生成行图像及该行内每个子图的矩形 ----------
+    # 存储所有行的图像和每个子图的全局矩形（相对于最终画布）
+    row_images = []
+    all_rects = []  # 最终返回的矩形列表，与原始 images 顺序一致
+    y_offset = 0  # 当前行在最终画布中的垂直偏移
+
+    for row in rows:
+        # 计算该行最大高度
+        max_h = max([img.shape[0] for img in row])
+
+        # 存储本行的 pad 后图像以及每个子图在行图像中的偏移 (x, top, w, h)
+        padded_imgs = []
+        row_rects = []  # 本行每个子图在行图像中的矩形 (x, top, w, h)
+        x_offset = 0
+
+        for img in row:
+            h, w = img.shape[:2]
+            # 计算垂直补边
+            if align == 'top':
+                top = 0
+                bottom = max_h - h
+            elif align == 'bottom':
+                top = max_h - h
+                bottom = 0
+            else:  # center
+                top = (max_h - h) // 2
+                bottom = max_h - h - top
+
+            # 补边生成 pad 图像
+            pad_img = cv2.copyMakeBorder(img, top, bottom, 0, 0,
+                                         cv2.BORDER_CONSTANT, value=fill_color)
+            padded_imgs.append(pad_img)
+            # 记录该子图在行图像中的位置（x, y, 原始宽, 原始高）
+            row_rects.append((x_offset, top, w, h))
+            x_offset += w  # 水平拼接时宽度不变，直接累加
+
+        # 水平拼接本行所有 pad 图像
+        row_image = np.hstack(padded_imgs)
+        row_images.append(row_image)
+
+        # 将该行每个子图的坐标转换为全局坐标（加上当前 y_offset）
+        for (x, top, w, h) in row_rects:
+            all_rects.append((x, y_offset + top, w, h))
+
+        # 更新 y_offset 为下一行做准备（累加本行高度）
+        y_offset += row_image.shape[0]
+
+    # ---------- 4. 将所有行垂直拼接，并统一宽度（右侧补白） ----------
+    # 计算最大行宽
+    max_row_width = max([img.shape[1] for img in row_images])
+
+    # 将每行宽度补齐到 max_row_width（右侧补白）
+    padded_rows = []
+    for img in row_images:
+        h, w = img.shape[:2]
+        if w < max_row_width:
+            pad_right = max_row_width - w
+            img_padded = cv2.copyMakeBorder(img, 0, 0, 0, pad_right,
+                                            cv2.BORDER_CONSTANT, value=fill_color)
+            padded_rows.append(img_padded)
+        else:
+            padded_rows.append(img)
+
+    result = np.vstack(padded_rows)
+    result = np.ascontiguousarray(result)
+
+    return result, all_rects
 
 
 def concat_images_with_padding_new(img1, img2, align='top', fill_color=(0, 0, 0, 255)):
@@ -181,32 +353,6 @@ def concat_images_with_padding_new(img1, img2, align='top', fill_color=(0, 0, 0,
     return np.ascontiguousarray(result)
 
 
-def hconcat_pad(img1, img2, pad_color=0):
-    """
-    水平拼接两张图，高度不同时用 pad_color 填充对齐
-    pad_color: 0 为黑边，255 为白边，(0,0,255) 为红边
-    """
-    # if img1.shape != 2 and img1.shape[-1] != 1:
-    #     color_deep = img1.shape[-1]
-    #     if color_deep == 3:
-    #         pad_color = (0, 0, 0)
-    #     else:
-    #         pad_color = (255, 0, 0, 255)
-    h1, w1 = img1.shape[:2]
-    h2, w2 = img2.shape[:2]
-    target_h = max(h1, h2)
-
-    # 为 img1 补上/下边
-    delta_h1 = target_h - h1
-    if delta_h1 > 0:
-        img1 = cv2.copyMakeBorder(img1, 0, delta_h1, 0, 0, cv2.BORDER_CONSTANT, value=pad_color)
-    # 为 img2 补上/下边
-    delta_h2 = target_h - h2
-    if delta_h2 > 0:
-        img2 = cv2.copyMakeBorder(img2, 0, delta_h2, 0, 0, cv2.BORDER_CONSTANT, value=pad_color)
-
-    print("here near return")
-    return np.hstack((img1, img2))
 
 
 def icon_width_factor(image_origin_width, image_origin_height):
@@ -317,8 +463,8 @@ def get_grey_image(image):
     return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 
-def get_search_area(tar_x, tar_y, tar_w_w, tar_w_h, tem_w, tem_h, tar_s_divided_tem_s_in=1, w_variance=3, h_variance=2):
-    print(f"tar_x : {tar_x} , tar_y : {tar_y}, tar_w_w : {tar_w_w}, tar_w_h : {tar_w_h}, tem_w : {tem_w}, tem_h : {tem_h}")
+def get_search_area(tar_x, tar_y, tar_w_w, tar_w_h, tem_w, tem_h, tar_s_divided_tem_s_in=1, w_variance=3.0, h_variance=2.0):
+    # print(f"tar_x : {tar_x} , tar_y : {tar_y}, tar_w_w : {tar_w_w}, tar_w_h : {tar_w_h}, tem_w : {tem_w}, tem_h : {tem_h}")
     tem_w_in_tar = tem_w * tar_s_divided_tem_s_in
     tem_h_in_tar = tem_h * tar_s_divided_tem_s_in
 
@@ -344,8 +490,8 @@ def get_search_area(tar_x, tar_y, tar_w_w, tar_w_h, tem_w, tem_h, tar_s_divided_
 
 
 def get_search_are_by_default(tar_w_w, tar_w_h, tem_w_w, tem_w_h, tem_x, tem_y, tem_w, tem_h, position_group,
-                              w_variance=3,
-                              h_variance=2, tar_s_divided_tem_s=None):
+                              w_variance=3.0,
+                              h_variance=2.0, tar_s_divided_tem_s=None):
     target_x, target_y, tar_s_divided_tem_s = calculate_target_template_xy(tar_w_w,
                                                                            tar_w_h,
                                                                            tem_w_w,
@@ -364,25 +510,27 @@ def get_sub_image_from_image(image, x, y, w, h):
 from typing import Optional, Union, List
 
 
-@timer
+# @timer
+@stats_decorator
 def match_template_probability(
-        template: Union[str, np.ndarray],
         target: Union[str, np.ndarray],
+        template: Union[str, np.ndarray],
         scales: Optional[List[float]] = None,
         method=cv2.TM_CCOEFF_NORMED,
-        use_color: bool = False,
-        use_canny: bool = False,          # 新增
-        canny_thresh1: int = 30,          # 新增，Canny低阈值
-        canny_thresh2: int = 90,         # 新增，Canny高阈值
+        force_grey: bool = False,
+        use_canny: bool = False,  # 新增
+        canny_thresh1: int = 30,  # 新增，Canny低阈值
+        canny_thresh2: int = 90,  # 新增，Canny高阈值
         output_img: bool = False,
         visualize_path: Optional[str] = None,
         scale_min: float = 0.7,
         scale_max: float = 1.0,
         scale_step: int = 10,
-        min_score_thresh: float = 0.7,
+        min_score_thresh: float = 0.7, #只用于显示图像
         name: str = ""
 ) -> dict:
     """
+    计算 模版匹配目标图像 值
     Returns dict:
       { 'score': float (0..1),
         'scale': float,
@@ -405,14 +553,13 @@ def match_template_probability(
     tgt = _load(target)
 
     # use grayscale by default (more robust for anime head shapes); allow color if requested
-    if use_color:
+    if not force_grey:
         tpl_proc = tpl
         tgt_proc = tgt
     else:
         # 转为灰度
         tpl_proc = cv2.cvtColor(tpl, cv2.COLOR_BGR2GRAY) if len(tpl.shape) == 3 else tpl
         tgt_proc = cv2.cvtColor(tgt, cv2.COLOR_BGR2GRAY) if len(tgt.shape) == 3 else tgt
-
 
     # --- 新增 Canny 边缘提取 ---
     if use_canny:
@@ -446,7 +593,8 @@ def match_template_probability(
         interp = cv2.INTER_LINEAR if s >= 1.0 else cv2.INTER_AREA
         tpl_resized = cv2.resize(tpl_proc, (new_w, new_h), interpolation=interp)
 
-        # match
+        # print("tgt_proc.shape",tgt_proc.shape,"tpl_resized.shape",tpl_resized.shape)
+        # matchcv2.TM_CCOEFF_NORMED cv2.matchTemplate(edges1, edges2, cv2.TM_CCOEFF_NORMED)
         res = cv2.matchTemplate(tgt_proc, tpl_resized, method)
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
 
@@ -455,7 +603,7 @@ def match_template_probability(
             loc = min_loc
         elif method == cv2.TM_SQDIFF:
             # 未归一化平方差：值越小越好，映射到 (0,1] 且越大越好
-            print("_______________________TM_SQDIFF__min_val",min_val)
+            print("_______________________TM_SQDIFF__min_val", min_val)
             score = 1.0 / (1.0 + min_val)
             loc = min_loc
         else:
@@ -480,6 +628,22 @@ def match_template_probability(
     top_left = (x, y)
     bottom_right = (x + w, y + h)
 
+    if init_set["img_show"]:
+        tgt_proc_p = pad_image(tgt_proc, 0, 30, 0, 10)
+        tgt_proc_b = cv2.resize(tgt_proc, None, fx=3, fy=3)
+        tpl_resized_b = cv2.resize(tpl_resized, None, fx=3, fy=3)
+
+        tgt_proc_b_p = pad_image(tgt_proc_b, 0, 30, 0, 10)
+        tpl_resized_b_p = pad_image(tpl_resized_b, 0, 30, 0, 10)
+
+        padding_image = concat_images_with_padding_new(tgt_proc_p, tgt_proc_b_p)
+        padding_image = concat_images_with_padding_new(padding_image, tpl_resized_b_p)
+        cv2.putText(padding_image, str(f"{best_score:0.4f} {name}"), (0, tgt_proc_p.shape[0]),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+        cv2.rectangle(padding_image, top_left, bottom_right, (0, 255, 0), 2)
+        cv2.imshow("", padding_image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
     # optional visualization
     if output_img:
         if visualize_path is not None:
@@ -499,42 +663,62 @@ def match_template_probability(
     }
 
 
-def template_match_target_new(tar_img, tem_img, target_process_method=None, template_process_method=None):
-    if target_process_method is not None:
-        tar_img = target_process_method(tar_img)
+def mask_img_by_color(img, color_ranges):
+    """
+    根据 HSV 颜色范围生成掩码。
 
-    if template_process_method is not None:
-        tem_image = template_process_method(tem_img)
+    参数：
+        img: BGR 格式的图像 (numpy.ndarray, dtype=uint8, 3通道)
+        color_ranges: dict, 包含 'h','s','v' 键，每个键为 [min, max] 列表
+                      例如: {'h': [100, 140], 's': [50, 255], 'v': [50, 255]}
 
-    result = cv2.matchTemplate(tar_img, tem_img, cv2.TM_CCOEFF_NORMED)
-    _, max_val, _, max_loc = cv2.minMaxLoc(result)
+    返回：
+        ele_mask: 单通道二值掩码 (numpy.ndarray, dtype=uint8)
+    """
+    # ---------- 校验 1: 类型检查 ----------
+    if not isinstance(img, np.ndarray):
+        raise TypeError(f"img 必须是 numpy.ndarray，当前类型: {type(img).__name__}")
 
-    search_local_x, search_local_y = max_loc
-    # target_match_x = roi_x_fix + search_local_x
-    # target_match_y = roi_y_fix + search_local_y
+    # ---------- 校验 2: 数据类型检查 ----------
+    if img.dtype != np.uint8:
+        raise TypeError(f"img 必须是 uint8 类型，当前 dtype: {img.dtype}")
 
-    return max_val, search_local_x, search_local_y
+    # ---------- 校验 3: 维度检查 ----------
+    if img.ndim != 3:
+        raise ValueError(f"img 必须是 3 通道 BGR 图像，当前维度: {img.ndim} (期望 3)")
 
-def template_match_target(tar_img, tem_img, target_process_method=None, template_process_method=None):
-    if target_process_method is not None:
-        tar_img = target_process_method(tar_img)
+    # ---------- 校验 4: 通道数检查 ----------
+    channels = img.shape[2] if img.ndim >= 3 else 0
+    if channels != 3:
+        raise ValueError(f"img 必须是 3 通道 BGR 图像，当前通道数: {channels} (期望 3)")
 
-    if template_process_method is not None:
-        tem_img = template_process_method(tem_img)
+    # ---------- 校验 5: color_ranges 格式检查 ----------
+    required_keys = ['h', 's', 'v']
+    for key in required_keys:
+        if key not in color_ranges:
+            raise KeyError(f"color_ranges 缺少必需键 '{key}'")
+        val = color_ranges[key]
+        if not isinstance(val, (list, tuple)) or len(val) != 2:
+            raise ValueError(f"color_ranges['{key}'] 必须是长度为 2 的列表/元组，当前: {val}")
+        if not all(isinstance(x, (int, float)) for x in val):
+            raise TypeError(f"color_ranges['{key}'] 的值必须是数字")
+        if val[0] > val[1]:
+            raise ValueError(f"color_ranges['{key}'] 最小值不能大于最大值: {val}")
 
-    print("tar_img.shape", tar_img.shape)
-    print("tem_img.shape", tem_img.shape)
-    result = cv2.matchTemplate(tar_img, tem_img, cv2.TM_CCOEFF_NORMED)
-    _, max_val, _, max_loc = cv2.minMaxLoc(result)
-    search_local_x, search_local_y = max_loc
-    return max_val,(search_local_x, search_local_y)
-
-
+    # ---------- 核心逻辑 ----------
+    img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    color_mask = cv2.inRange(
+        img_hsv,
+        (color_ranges['h'][0], color_ranges['s'][0], color_ranges['v'][0]),
+        (color_ranges['h'][1], color_ranges['s'][1], color_ranges['v'][1])
+    )
+    return color_mask
 
 def compute_element_fill_ratio(
         img,
         color_ranges,  # 例如: {'h': [130, 160], 's': [50, 255], 'v': [50, 255]}
-        start_angle=0, #
+        start_angle=0,  #
+        extra_angle:float=0.1, # 额外度数防止初始度数没染色
         thickness_ratio=0.2,  # 环宽 = 外半径 * thickness_ratio (当仅有一个圆时)
         outer_radius=None,  # 手动指定外圆半径（若提供则跳过霍夫检测）
         inner_radius=None,  # 手动指定内圆半径（优先级最高）
@@ -567,7 +751,6 @@ def compute_element_fill_ratio(
     ele_mask = cv2.inRange(img_hsv, (color_ranges['h'][0], color_ranges['s'][0], color_ranges['v'][0]),
                            (color_ranges['h'][1], color_ranges['s'][1], color_ranges['v'][1]))
 
-
     # ----- 1. 确定内外圆半径 -----
     if outer_radius is None and inner_radius is None:
         # 自动检测圆
@@ -594,8 +777,8 @@ def compute_element_fill_ratio(
             # dist_center = np.hypot(x - img_center[0], y - img_center[1])
             # 若检测到的圆偏小，且圆心接近图像中心，则视作内圆
             # if r < min(h, w) * 0.4 and dist_center < min(h, w) * 0.2:
-            print("img_center",img_center,"inner_r",r)
-            if r < min(h, w) * 0.4 :
+            print("img_center", img_center, "inner_r", r)
+            if r < min(h, w) * 0.4:
                 inner_r = r
                 outer_r = int(inner_r / (1 - thickness_ratio))  # 根据厚度反推外半径
                 print("仅检测到一个圆，将其作为内圆，并估算外圆")
@@ -628,18 +811,14 @@ def compute_element_fill_ratio(
     # 安全保护：内外半径合法
     if inner_r >= outer_r:
         outer_r = inner_r + 4
-    print(f"外半径: {outer_r}, 内半径: {inner_r}, 圆心: {center}")
+    # print(f"外半径: {outer_r}, 内半径: {inner_r}, 圆心: {center}")
 
     # ----- 2. 生成环状掩膜 -----
     mask = np.zeros((h, w), dtype=np.uint8)
     cv2.circle(mask, center, outer_r, 255, -1)
     cv2.circle(mask, center, inner_r, 0, -1)
 
-
     # if circles is not None and len(circles) > 0:
-
-
-
 
     ele_mask_after = cv2.bitwise_and(ele_mask, mask)  # 更简洁，避免np.where
     # cv2.imshow("ele_mask", ele_mask)
@@ -649,7 +828,7 @@ def compute_element_fill_ratio(
     # ----- 3. 角度扫描计算填充比例（新核心逻辑）-----
     circle_deg = 360
     num_steps = int(circle_deg / angle_step)
-    angles_deg = np.linspace(start_angle + 0.1, start_angle + circle_deg, num_steps, endpoint=True)  # 不包含360°
+    angles_deg = np.linspace(start_angle + extra_angle, start_angle + circle_deg, num_steps, endpoint=True)  # 不包含360°
     angles_rad = np.deg2rad(angles_deg)
 
     # 预分配填充标记
@@ -672,8 +851,8 @@ def compute_element_fill_ratio(
                 ray_has_ele_color = True
                 break
         filled[i] = ray_has_ele_color
-    print(filled[:10])
-    print("np.sum(filled)", np.sum(filled))
+    # print(filled[:10])
+    # print("np.sum(filled)", np.sum(filled))
 
     # 寻找第一个未填充的角度
     first_empty = None
@@ -681,23 +860,25 @@ def compute_element_fill_ratio(
         if not val:
             first_empty = i
             break
-    print("first_empty", first_empty)
+    # print("first_empty", first_empty)
 
     if first_empty is None:
         ratio = 1.0
-        max_angle = 360.0
+        max_angle = start_angle + circle_deg
     else:
         ratio = first_empty / num_steps
         max_angle = angles_deg[first_empty]
 
-    print("ratio",ratio)
+    print("ratio", ratio)
     # ----- 4. 可视化（增强显示角度终点）-----
-    if visualize:
+
+    if visualize or init_set["img_show"]:
         vis = img.copy()
         cv2.circle(vis, center, outer_r, (0, 255, 0), 1)
         cv2.circle(vis, center, inner_r, (0, 0, 255), 1)
 
-        print(f"{center}___________{start_angle}___________x+{outer_r*np.cos(start_angle)},y-{outer_r * np.sin(start_angle)}")
+        # print(
+            # f"{center}___________{start_angle}___________x+{outer_r * np.cos(start_angle)},y-{outer_r * np.sin(start_angle)}")
         # 绘制起始方向（绿色箭头，3点钟方向）
         start_rad = np.deg2rad(start_angle)
         start_x = int(center[0] + outer_r * np.cos(start_rad))
@@ -711,24 +892,82 @@ def compute_element_fill_ratio(
         cv2.line(vis, center, (end_x, end_y), (0, 0, 255), 3)
 
         # 叠加半透明区域（方便视觉确认）
-        purple_overlay = np.zeros_like(vis)
-        purple_overlay[ele_mask_after > 0] = (0, 0, 255)
-        vis = cv2.addWeighted(vis, 0.6, purple_overlay, 0.4, 0)
+        # purple_overlay = np.zeros_like(vis)
+        # purple_overlay[ele_mask_after > 0] = (0, 0, 255)
+        # vis = cv2.addWeighted(vis, 0.6, purple_overlay, 0.4, 0)
 
-        fi1 = ele_mask#concat_images_with_padding_new(edges,mask)
+        fi1 = ele_mask  # concat_images_with_padding_new(edges,mask)
         fi2 = concat_images_with_padding_new(fi1, mask)
-        fi3 = concat_images_with_padding_new(fi2, ele_mask_after)
+        # fi3 = concat_images_with_padding_new(fi2, ele_mask_after)
         result = cv2.bitwise_and(img, img, mask=ele_mask_after)
-        fi4 = concat_images_with_padding_new(fi3, result)
+        fi3 = concat_images_with_padding_new(fi2, result)
+        fi4 = concat_images_with_padding_new(fi3, img)
         fi5 = concat_images_with_padding_new(fi4, vis)
 
-        cv2.imshow("Angle Scan Result", fi5)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        fi5_biger = cv2.resize(fi5,None,fx=1.5,fy=1.5)
+        hv, wv = fi5_biger.shape[:2]
+        mr=60
+        bottom_add = 30
+        vis_pad = pad_image(fi5_biger, 0, bottom_add, 0, mr)
+        name = data_store.get_name()
+        cv2.putText(vis_pad, str(f"{name} "), (0, bottom_add + hv - 20),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
+        cv2.putText(vis_pad, str(f"{ratio*100:.4f}%"), (0, bottom_add + hv - 5),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
+
+        print("=================vis_pad.shape",vis_pad.shape)
+        data_store.add(vis_pad, "percentage"+str(ratio))
+        # cv2.imshow("Angle Scan Result", fi5)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
 
     return ratio
 
 
+def get_sub_tar_img(tar_img, tem_hw, tem_tar_xy, tem_window_hw, position_group, x_variance_factor,
+                    y_variance_factor ):
+    """
+        :param tar_img: 目标图数据
+        :param tem_img_hw: 模板图数据高宽
+        :param tem_tar_xy: 模版中目标图像左上角xy
+        :param tem_window_hw: 模版原始图像宽高
+        :param position_group: @IconPosition 模板匹配位置
+        :param x_variance_factor: 模板宽度扩大搜索倍数
+        :param y_variance_factor: 模板高度扩大搜索倍数
+        :return: @np.array 目标搜索区域图片数据
+        """
+    tar_w_hw = tar_img.shape[:2]
+    target_x, target_y, tar_s_divided_tem_s = calculate_target_template_xy(tar_w_hw[1],
+                                                                           tar_w_hw[0],
+                                                                           tem_window_hw[1],
+                                                                           tem_window_hw[0],
+                                                                           tem_tar_xy[0], tem_tar_xy[1], position_group)
+    roi_x_fix, roi_y_fix, roi_w_fix, roi_h_fix = get_search_area(target_x, target_y,
+                                                                 tar_w_hw[1],
+                                                                 tar_w_hw[0],
+                                                                 tem_hw[1],
+                                                                 tem_hw[0],
+                                                                 tar_s_divided_tem_s,
+                                                                 x_variance_factor, y_variance_factor)
+    return get_sub_image_from_image(tar_img, roi_x_fix, roi_y_fix, roi_w_fix, roi_h_fix)
+
+def con_percentage(tar_img,char_element):
+    """当前角色 协奏百分比 """
+    position_group = get_position_group(con_info["position_group"])
+    tar_window_h, tar_window_w = tar_img.shape[:2]
+    tem_window_w, tem_window_h = con_info["tem_window_w"], con_info["tem_window_h"]
+    tem_target_x, tem_target_y = con_info["tem_target_x"], con_info["tem_target_y"]
+    tem_w = con_info["tem_w"]
+    tem_h = con_info["tem_h"]
+    roi_x_fix, roi_y_fix, roi_w_fix, roi_h_fix = get_search_are_by_default(tar_window_w, tar_window_h, tem_window_w,
+                                                                           tem_window_h, tem_target_x, tem_target_y,
+                                                                           tem_w, tem_h, position_group,
+                                                                           w_variance=1.2,
+                                                                           h_variance=1.2)
+    target_img_sub = get_sub_image_from_image(tar_img, roi_x_fix, roi_y_fix, roi_w_fix, roi_h_fix)
+    ele_color = mask_colors[char_element]
+    percentage = compute_element_fill_ratio(target_img_sub, ele_color, visualize=False)
+    return percentage
 
 def draw_lines(image, global_xy, max_val, template_width_a, template_height_a, name, min_score=0.65,
                search_area_xywh=None,
@@ -751,7 +990,7 @@ def draw_lines(image, global_xy, max_val, template_width_a, template_height_a, n
     else:
         if template_image is not None:
             if image.shape == 2:
-                image = hconcat_pad(image, template_image)
+                image = concat_images_with_padding_new(image, template_image)
             else:
                 image = concat_images_with_padding_new(image, template_image)
         cv2.putText(image, f"{max_val:.2f} {valid}", (search_area_xywh[0], search_area_xywh[1] + 15),

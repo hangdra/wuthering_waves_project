@@ -4,118 +4,9 @@
 import cv2
 import numpy as np
 from typing import Optional, Union, List
-from src.utils.image_dealer import match_template_probability, concat_images_with_padding_new, template_match_target, \
+from src.utils.image_dealer import match_template_probability, concat_images_with_padding_new, \
     pad_image, resize_template_match_target
 
-# def match_template_probability(
-#         template: Union[str, np.ndarray],
-#         target: Union[str, np.ndarray],
-#         scales: Optional[List[float]] = None,
-#         method=cv2.TM_CCOEFF_NORMED,
-#         use_color: bool = False,
-#         output_img: bool = False,
-#         visualize_path: Optional[str] = None,
-#         scale_min: float = 0.75,
-#         scale_max: float = 1.0,
-#         scale_step: int = 5,
-#         min_score_thresh: float = 0.7,
-#         name: str = ""
-# ) -> dict:
-#     """
-#     Returns dict:
-#       { 'score': float (0..1),
-#         'scale': float,
-#         'top_left': (x,y),
-#         'bottom_right': (x,y),
-#         'resized_template_shape': (h,w) }
-#     """
-#
-#     # load images if paths given
-#     def _load(img):
-#         if isinstance(img, str):
-#             im = cv2.imread(img, cv2.IMREAD_COLOR)
-#             if im is None:
-#                 raise FileNotFoundError(f"Can't read image: {img}")
-#             return im
-#         return img.copy()
-#
-#     tpl = _load(template)
-#     tgt = _load(target)
-#
-#     # use grayscale by default (more robust for anime head shapes); allow color if requested
-#     if use_color:
-#         tpl_proc = tpl
-#         tgt_proc = tgt
-#     else:
-#         tpl_proc = cv2.cvtColor(tpl, cv2.COLOR_BGR2GRAY)
-#         tgt_proc = cv2.cvtColor(tgt, cv2.COLOR_BGR2GRAY)
-#
-#     th, tw = tpl_proc.shape[:2]
-#     H, W = tgt_proc.shape[:2]
-#
-#     if scales is None:
-#         scales = list(np.linspace(scale_min, scale_max, scale_step))  # covers smaller->larger scales; includes ~2.0
-#         # scales = [1]
-#
-#     best_score = -1.0
-#     best_scale = None
-#     best_loc = None
-#     best_size = None
-#
-#     for s in scales:
-#         # resize template
-#         new_w = int(round(tw * s))
-#         new_h = int(round(th * s))
-#         if new_w < 3 or new_h < 3:
-#             continue
-#         if new_w > W or new_h > H:
-#             continue
-#         interp = cv2.INTER_LINEAR if s >= 1.0 else cv2.INTER_AREA
-#         tpl_resized = cv2.resize(tpl_proc, (new_w, new_h), interpolation=interp)
-#
-#         # match
-#         res = cv2.matchTemplate(tgt_proc, tpl_resized, method)
-#         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
-#
-#         if method in (cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED):
-#             score = 1.0 - min_val  # lower is better -> convert
-#         else:
-#             score = max_val  # higher is better
-#
-#         # clamp to [0,1]
-#         score = float(np.clip(score, 0.0, 1.0))
-#
-#         if score > best_score:
-#             best_score = score
-#             best_scale = s
-#             best_loc = max_loc if method not in (cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED) else min_loc
-#             best_size = (new_w, new_h)
-#
-#     if best_loc is None:
-#         return {'score': 0.0, 'scale': None, 'top_left': None, 'bottom_right': None, 'resized_template_shape': None}
-#
-#     x, y = best_loc
-#     w, h = best_size
-#     top_left = (x, y)
-#     bottom_right = (x + w, y + h)
-#
-#     # optional visualization
-#     if output_img:
-#         if visualize_path is not None:
-#             if best_score > min_score_thresh:
-#                 vis = tgt.copy()
-#                 cv2.putText(vis, str(f"{best_score:0.4f} {name}"), (0, 15),
-#                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-#                 cv2.rectangle(vis, top_left, bottom_right, (0, 255, 0), 2)
-#                 imwrite_chinese(visualize_path + f"{best_score:0.4f}.png", vis)
-#
-#     return {
-#         'score': float(best_score),
-#         'scale': float(best_scale),
-#         'top_left': top_left,
-#         'bottom_right': bottom_right,
-#         'resized_template_shape': (h, w)
-#     }
 
 
 from pathlib import Path
@@ -123,7 +14,7 @@ import os
 import json
 import time
 import matplotlib.pyplot as plt
-from src.utils.image_dealer import get_search_area, get_sub_image_from_image, template_match_target_new, \
+from src.utils.image_dealer import get_search_area, get_sub_image_from_image, \
     calculate_target_template_xy, IconPosition
 from src.utils.read_write_image_from_filesys import imwrite_chinese, imread_chinese
 
@@ -131,7 +22,7 @@ from src.utils.read_write_image_from_filesys import imwrite_chinese, imread_chin
 if __name__ == "__main__":
 
 
-    use_color_img = False
+    force_grey = False
     project_root = Path(__file__).parent.parent.parent
     all_template_info_file_name = "src/assets/config/image_info/all_char_head_icon_small3.json"
     image_abs_path = os.path.join(project_root, all_template_info_file_name)
@@ -159,7 +50,7 @@ if __name__ == "__main__":
             print(tar_img.shape)
             tar_window_height, tar_window_width = tar_img.shape[:2]
             # tar_s_divided_tem_s = 1
-            if use_color_img:
+            if not force_grey:
                 print(head_icon_info[0]["image_file_from_project_root"])
                 all_head_icon_data = imread_chinese(head_icon_info[0]["image_file_from_project_root"])
             else:
@@ -216,7 +107,7 @@ if __name__ == "__main__":
                         print(filename, item["name"])
                         print("index", search_index,"resized.shape", resized.shape,"target_img_sub.shape", target_img_sub.shape)
                         use_canny_in = True
-                        res = match_template_probability(resized, target_img_sub, use_color=use_color_img,use_canny=use_canny_in,
+                        res = match_template_probability(target_img_sub,resized, force_grey=force_grey,use_canny=use_canny_in,
                                                          visualize_path="src/tests/images/auto/matches/" +
                                                                         filename.split("_")[0] + "_" + str(
                                                              search_index) + "_" + item["name"],method=cv2.TM_CCOEFF_NORMED )
@@ -247,7 +138,9 @@ if __name__ == "__main__":
                         #     cv2.waitKey(0)
                         #     cv2.destroyAllWindows()
     time_e = time.perf_counter()
-    print(f"all match done {counter}/{counter} time cost : {(time_e - time_s):.4f}")
+    avg_time = (time_e - time_s) / counter if counter > 0 else 0.0
+
+    print(f"all match done {counter}/{counter} time cost : {(time_e - time_s):.4f}, average time cost :{avg_time:.4f} ")
     print(file_result)
     padding_image = None
     for filename in file_result.keys():

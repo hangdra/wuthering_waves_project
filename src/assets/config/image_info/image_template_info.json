@@ -16,7 +16,7 @@
     "template_x": 0,
     "template_y": 0,
     "load_image": true,
-    "target_search_type": "single_target"
+    "target_search_type": "single_match"
   },
   {
     "image_file_from_project_root": "src/assets/images/all_in_one_template.png",
@@ -35,7 +35,7 @@
     "template_x": 13,
     "template_y": 0,
     "load_image": true,
-    "target_search_type": "single_target"
+    "target_search_type": "single_match"
   },
   {
     "image_file_from_project_root": "src/assets/images/all_in_one_template.png",
@@ -54,7 +54,7 @@
     "template_x": 26,
     "template_y": 0,
     "load_image": true,
-    "target_search_type": "single_target"
+    "target_search_type": "single_match"
   },
   {
     "image_file_from_project_root": "src/assets/images/all_in_one_template.png",
@@ -73,6 +73,6 @@
     "template_x": 44,
     "template_y": 0,
     "load_image": true,
-    "target_search_type": "single_target"
+    "target_search_type": "single_match"
   }
 ]

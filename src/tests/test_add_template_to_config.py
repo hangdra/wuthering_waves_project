@@ -11,11 +11,11 @@ from src.utils.image_dealer import *
 
 project_root = Path(__file__).parent.parent.parent
 
-template_one ={
+template_one = {
     "image_file_from_project_root": "",
     "image_file": "",
     "name": "",
-    "template_type":"",
+    "template_type": "",
     "target_process_method": "",
     "icon_position_group": "",
     "min_success_score": 0.7,
@@ -34,9 +34,11 @@ template_one ={
 }
 
 img_dic = {}
+
+
 def load_img(path, flag=cv2.IMREAD_GRAYSCALE):
     if path not in img_dic:
-        img_dic[path] = imread_chinese(path,flag=flag)
+        img_dic[path] = imread_chinese(path, flag=flag)
     return img_dic[path]
 
 
@@ -58,6 +60,7 @@ def check_config(config1):
     if config1_oi_w != config1_last_x:
         raise Exception("config1_oi_w!=last_x oi_w", config1_oi_w, " config1_last_x", config1_last_x)
     return config1_img_data
+
 
 def combine_two_config_and_image_from_file(config_list_in, output_img_dir_in):
     item_img_list = []
@@ -81,15 +84,14 @@ def combine_two_config_and_image_from_file(config_list_in, output_img_dir_in):
 
             combine_img_inner = concat_images_with_padding_new(combine_img_inner, item_img_list[i])
 
-
     for item in template_new:
         item["image_file_from_project_root"] = str(output_img_dir_in)
         item["image_file"] = os.path.basename(output_img_dir_in)
 
-    return template_new,combine_img_inner
+    return template_new, combine_img_inner
 
 
-def merge_two_config_and_img(old_template_info_list,new_tem_obj,new_img_data,output_img_dir):
+def merge_two_config_and_img(old_template_info_list, new_tem_obj, new_img_data, output_img_dir):
     # with open(template_config_origin, 'r', encoding='utf-8') as f:
     #     template_info_list = json.load(f)
     last_x = 0
@@ -102,40 +104,38 @@ def merge_two_config_and_img(old_template_info_list,new_tem_obj,new_img_data,out
             old_img_data = load_img(item["image_file_from_project_root"])
             last_image_file = image_file
         elif image_file != last_image_file:
-            raise Exception("has two img file to read ",image_file,"and",last_image_file)
-        x_end_here = item["template_x"]+item["template_width"]
-        if x_end_here>last_x:
+            raise Exception("has two img file to read ", image_file, "and", last_image_file)
+        x_end_here = item["template_x"] + item["template_width"]
+        if x_end_here > last_x:
             last_x = x_end_here
-    oi_h,oi_w = old_img_data.shape[:2]
-    if oi_w!=last_x:
-        raise Exception("oi_w!=last_x oi_w",oi_w," last_x",last_x)
+    oi_h, oi_w = old_img_data.shape[:2]
+    if oi_w != last_x:
+        raise Exception("oi_w!=last_x oi_w", oi_w, " last_x", last_x)
 
     old_template_info_list_c = old_template_info_list.copy()
-    combine_img = concat_images_with_padding_new(old_img_data,new_img_data)
-    c_h,c_w = combine_img.shape[:2]
+    combine_img = concat_images_with_padding_new(old_img_data, new_img_data)
+    c_h, c_w = combine_img.shape[:2]
     last_x_for_new_tem = last_x
-    item =new_tem_obj
+    item = new_tem_obj
     item["image_file_from_project_root"] = output_img_dir
     item["image_file"] = os.path.basename(output_img_dir)
-    item["template_x"]= last_x_for_new_tem
-    item["template_y"]=y_c
+    item["template_x"] = last_x_for_new_tem
+    item["template_y"] = y_c
     last_x_for_new_tem = last_x_for_new_tem + item["template_width"]
     old_template_info_list_c.append(item.copy())
-
 
     if c_w != last_x_for_new_tem:
         raise Exception(f"after combine img c_w {c_w}!= last_x_for_new_tem{last_x_for_new_tem}")
 
-    return old_template_info_list_c,combine_img
+    return old_template_info_list_c, combine_img
     with open(output_config, 'w', encoding='utf-8') as f:
         json.dump(old_template_info_list_c, f, indent=2)  # 文件里会写入 "resize": false
     imwrite_chinese(output_img, combine_img)
 
-def get_new_item_template(tem_origin_img_file_dir, template_one_in,img_process_method_name=None,test_show = True):
+
+def get_new_item_template(tem_origin_img_file_dir, template_one_in, img_process_method_name=None, test_show=True):
     # with open(template_config_origin, 'r', encoding='utf-8') as f:
     #     template_info_list = json.load(f)
-
-
 
     image_before_tem = imread_chinese(f"{tem_origin_img_file_dir}")
     tem_w_h, tem_w_w = image_before_tem.shape[:2]
@@ -145,10 +145,10 @@ def get_new_item_template(tem_origin_img_file_dir, template_one_in,img_process_m
     tem_h = template_one_in["template_height"]
     template_one_in["template_window_width"] = tem_w_w
     template_one_in["template_window_height"] = tem_w_h
-    if img_process_method_name!="" and img_process_method_name is not None:
+    if img_process_method_name != "" and img_process_method_name is not None:
         template_one_in["target_process_method"] = img_process_method_name
-    tem_img = image_before_tem[template_window_target_y:template_window_target_y+tem_h,
-                                template_window_target_x:template_window_target_x+tem_w]
+    tem_img = image_before_tem[template_window_target_y:template_window_target_y + tem_h,
+              template_window_target_x:template_window_target_x + tem_w]
     img_process_method = get_process_method(img_process_method_name)
     tem_img = img_process_method(tem_img)
     if test_show:
@@ -156,12 +156,10 @@ def get_new_item_template(tem_origin_img_file_dir, template_one_in,img_process_m
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
+    return template_one_in, tem_img
 
 
-    return template_one_in,tem_img
-
-
-config_dir = project_root/"src/assets/config/image_info/image_template_info.json"
+config_dir = project_root / "src/assets/config/image_info/image_template_info.json"
 new_template_img_file_dir = "src/tests/images/template/丽贝卡左键满169.png"
 img_process_method_name = "get_rid_dark_part_for_matching"
 template_one_c = template_one.copy()
@@ -170,25 +168,25 @@ template_one_c["template_window_target_x"] = 1038
 template_one_c["template_window_target_y"] = 801
 template_one_c["template_width"] = 19
 template_one_c["template_height"] = 19
-template_one_c["target_search_type"] = "multiple_targets"
+template_one_c["target_search_type"] = "multiple_match"
 template_one_c["target_search_return"] = "skill_no"
 template_one_c["template_area_list"] = [
-                                      {
-                                        "x": 1198,
-                                        "y": 801,
-                                        "skill_no":4
-                                      },
-                                      {
-                                        "x": 1118,
-                                        "y": 801,
-                                        "skill_no":5
-                                      },
-                                      {
-                                        "x": 1038,
-                                        "y": 801,
-                                        "skill_no":6
-                                      }
-                                    ]
+    {
+        "x": 1198,
+        "y": 801,
+        "skill_no": 4
+    },
+    {
+        "x": 1118,
+        "y": 801,
+        "skill_no": 5
+    },
+    {
+        "x": 1038,
+        "y": 801,
+        "skill_no": 6
+    }
+]
 
 show_image = True
 out_put_file = False
@@ -208,11 +206,9 @@ output_file_dir = ""
 # print(new_item)
 
 
-
-
-config1_dir = project_root/"src/assets/config/image_info/image_template_info.json"
-config2_dir = project_root/"src/assets/config/image_info/char_123_active.json"
-config3_dir = project_root/"src/assets/config/image_info/all_char_head_icon_small2.json"
+config1_dir = project_root / "src/assets/config/image_info/image_template_info.json"
+config2_dir = project_root / "src/assets/config/image_info/char_123_active.json"
+config3_dir = project_root / "src/assets/config/image_info/all_char_head_icon_small2.json"
 
 config_list = []
 with open(config1_dir, 'r', encoding='utf-8') as f:
@@ -235,17 +231,12 @@ for item in config_list[2]:
     item["load_image"] = True
     item["category"] = "all_char_head_icon"
 output_img_dir = "src/assets/images/new_all_in_one_template.png"
-template_new_r,combine_img_r =combine_two_config_and_image_from_file(config_list,output_img_dir)
+template_new_r, combine_img_r = combine_two_config_and_image_from_file(config_list, output_img_dir)
 
-new_config_path =project_root/"src/assets/config/image_info/new_image_template_info.json"
+new_config_path = project_root / "src/assets/config/image_info/new_image_template_info.json"
 with open(new_config_path, 'w', encoding='utf-8') as f:
     json.dump(template_new_r, f, indent=2)  # 文件里会写入 "resize": false
-imwrite_chinese(output_img_dir,combine_img_r)
-
-
-
-
-
+imwrite_chinese(output_img_dir, combine_img_r)
 
 # 一次性的
 # def old_config_add_new_shit():

@@ -36,3 +36,14 @@
 a = 1.
 if a == 1:
     print("ok")
+
+
+a = [1,2,3]
+for item in a:
+    if item == 4 :
+        q = item
+
+if q is None:
+    print("none")
+else:
+    print(q)

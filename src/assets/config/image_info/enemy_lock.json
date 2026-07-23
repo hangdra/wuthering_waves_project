@@ -1,0 +1,82 @@
+[
+  {
+    "image_file_from_project_root": "src/assets/images/enemy_lock.png",
+    "image_file": "enemy_lock.png",
+    "category": "enemy_lock",
+    "target_search_type": "multiple_match",
+    "target_search_return": "skill_no",
+    "target_process_method": "",
+    "template_process_method": "",
+    "force_grey": false,
+    "use_canny": false,
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1198,
+        "y": 801,
+        "skill_no": 4
+      },
+      {
+        "x": 1118,
+        "y": 801,
+        "skill_no": 5
+      },
+      {
+        "x": 1038,
+        "y": 801,
+        "skill_no": 6
+      }
+    ],
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "name": "enemy_lock_on",
+    "template_width": 20,
+    "template_height": 20,
+    "mask_color": "lock_on",
+    "template_x": 0,
+    "template_y": 0
+  },
+  {
+    "image_file_from_project_root": "src/assets/images/enemy_lock.png",
+    "image_file": "enemy_lock.png",
+    "category": "enemy_lock",
+    "target_search_type": "multiple_match",
+    "target_search_return": "skill_no",
+    "target_process_method": "",
+    "template_process_method": "",
+    "force_grey": false,
+    "use_canny": false,
+    "icon_position_group": "right_top",
+    "min_success_score": 0.7,
+    "template_window_width": 1600,
+    "template_window_height": 900,
+    "template_area_list": [
+      {
+        "x": 1198,
+        "y": 801,
+        "skill_no": 4
+      },
+      {
+        "x": 1118,
+        "y": 801,
+        "skill_no": 5
+      },
+      {
+        "x": 1038,
+        "y": 801,
+        "skill_no": 6
+      }
+    ],
+    "x_variance_factor": 2,
+    "y_variance_factor": 2,
+    "name": "enemy_lock_off",
+    "template_width": 20,
+    "template_height": 20,
+    "mask_color": "lock_off",
+    "template_x": 20,
+    "template_y": 0
+  }
+]
